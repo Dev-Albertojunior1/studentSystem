@@ -2,32 +2,38 @@ package com.albertocode.studentSystem.controller;
 
 import com.albertocode.studentSystem.model.Student;
 import com.albertocode.studentSystem.repository.StudentRepository;
+import com.albertocode.studentSystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/Student")
 public class studentController {
 
     @Autowired
-    private StudentRepository studentRepository;
+    private StudentService studentService;
 
-    @PostMapping("/student")
-    Student newStudent(@RequestBody Student newStudent){
-        return studentRepository.save(newStudent);
+    @PostMapping("/add")
+    public String add(@RequestBody Student student){
+        studentService.saveStudent(student);
+        return "New Student id added";
     }
 
-    @GetMapping("/studentss")
-    List<Student> getAllStudents(){
+//    Student newStudent(@RequestBody Student newStudent){
+//        return studentRepository.save(newStudent);
+//    }
+//    @GetMapping("/get")
+//    List<Student> getAllStudents(){
+//        return studentService.findAll();
+//    }
 
-        return studentRepository.findAll();
+    @GetMapping("/get")
+        public List<Student> getAllStudents(){
+            return studentService.getAllStudents();
+        }
 
-
-    }
 
 
 }

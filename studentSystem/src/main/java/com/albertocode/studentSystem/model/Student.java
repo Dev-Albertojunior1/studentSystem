@@ -17,6 +17,9 @@ public class Student {
 
     private String adress;
 
+    public Student() {
+    }
+
     public Long getId() {
         return id;
     }
